@@ -1,8 +1,6 @@
-# 🕷️ Spider Robot — Robot Lk
+# 🕷️ Spider Robot
 
 A 4-legged, 12-servo spider robot built on Arduino with two operating modes: **Bluetooth remote control** and **autonomous obstacle avoidance**. Features inverse kinematics for smooth, natural movement and an OLED display for expressive "face" animations (Bluetooth mode).
-
-> Created by [Robot Lk](https://robotlk.com/) · [YouTube Channel](https://www.youtube.com/@RobotLk)
 
 ---
 
@@ -75,8 +73,8 @@ Two independent sketches are provided:
 
 | File | Mode |
 |---|---|
-| `Bluetooth-controlling_spider_robot_Robot_Lk.ino` | Bluetooth remote control + OLED face |
-| `Obstacle_Avoiding_Spider_Robot_Lk.ino` | Autonomous obstacle avoidance |
+| `Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
+| `Obstacle_Avoiding_Spider_Robot.ino` | Autonomous obstacle avoidance |
 
 ### Required Libraries
 
@@ -124,7 +122,7 @@ Connect with any Bluetooth serial terminal app (e.g. **Serial Bluetooth Terminal
 
 ## 🤖 Obstacle Avoidance
 
-When flashed with `Obstacle_Avoiding_Spider_Robot_Lk.ino`, the robot:
+When flashed with the obstacle avoidance sketch, the robot:
 
 1. Walks forward continuously.
 2. Continuously polls the HC-SR04 sensor.
@@ -153,14 +151,7 @@ The robot uses 3-DOF inverse kinematics per leg. Key physical dimensions (in mm)
 
 ```
 .
-├── Bluetooth-controlling_spider_robot_Robot_Lk.ino   # Bluetooth + OLED sketch
-├── Obstacle_Avoiding_Spider_Robot_Lk.ino              # Autonomous mode sketch
-└── spider-3-in-1_bb.png                               # Fritzing circuit diagram
+├── Bluetooth-controlling_spider_robot.ino   # Bluetooth + OLED sketch
+├── Obstacle_Avoiding_Spider_Robot.ino        # Autonomous mode sketch
+└── spider-3-in-1_bb.png                      # Fritzing circuit diagram
 ```
-
----
-
-## 📄 License
-
-This project is published by **Robot Lk** for educational purposes.  
-Visit [robotlk.com](https://robotlk.com/) for more projects and build guides.
