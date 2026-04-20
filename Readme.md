@@ -6,7 +6,7 @@ A 4-legged, 12-servo spider robot built on Arduino with two operating modes: **B
 
 ## 📸 Circuit Diagram
 
-![Circuit Diagram](spider-3-in-1_bb.png)
+![Circuit Diagram](Schematics.png)
 
 ---
 
