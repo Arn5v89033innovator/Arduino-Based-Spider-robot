@@ -1,6 +1,4 @@
-//Robot Lk
-//Robot Lk YouTube Channel - https://www.youtube.com/@RobotLk
-//Robot Lk Website - https://robotlk.com/
+
 #include <Servo.h>    //to define and control servos
 #include <FlexiTimer2.h>//to set a timer to manage all servos
 #include <NewPing.h>   // ultrasonic distance sensor library
