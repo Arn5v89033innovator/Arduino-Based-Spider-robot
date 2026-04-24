@@ -29,24 +29,15 @@ The Spider Robot is a robot with 4 legs and 12 servos. It was built using Arduin
 ## Hardware
 
 | Component | Qty | Notes |
-
 |---|---|---|
-
 | Arduino Nano | 1 | The main microcontroller of the Spider Robot |
-
-SG90 / MG90 Servo | 12 | 3 servos per leg of the Spider Robot |
-
+| SG90 / MG90 Servo | 12 | 3 servos per leg of the Spider Robot |
 | HC-SR04 Ultrasonic Sensor | 1 | Used for obstacle avoidance in the Spider Robot |
-
 | HC-05 or HC-06 Bluetooth Module | 1 | Used for remote control of the Spider Robot |
-
 | SSD1306 OLED Display | 1 | Shows face animations in Bluetooth mode of the Spider Robot |
-
-DC-DC Buck Converter | 1 | Steps down the voltage to 7 V for the servos of the Spider Robot |
-
-18650 Li-ion Battery | 2 | Powers the Spider Robot at ~7.4 V |
-
-Toggle Switch | 1 | Turns the Spider Robot on and off |
+| DC-DC Buck Converter | 1 | Steps down the voltage to 7 V for the servos of the Spider Robot |
+| 18650 Li-ion Battery | 2 | Powers the Spider Robot at ~7.4 V |
+| Toggle Switch | 1 | Turns the Spider Robot on and off |
 
 ---
 
@@ -54,32 +45,22 @@ Toggle Switch | 1 | Turns the Spider Robot on and off |
 
 ### Servo Pin Mapping
 
-| Leg | Servo Arduino Pin |
-
+| Leg | Servo | Arduino Pin |
 |---|---|---|
-
-| Leg 0 | Coxa / Femur / Tibia D3 / D4 / D2 |
-
+| Leg 0 | Coxa / Femur / Tibia | D3 / D4 / D2 |
 | Leg 1 | Coxa / Femur / Tibia | D6 / D7 / D5 |
-
-Leg 2 | Coxa / Femur / Tibia | D9 / D8 / D10 |
-
+| Leg 2 | Coxa / Femur / Tibia | D9 / D8 / D10 |
 | Leg 3 | Coxa / Femur / Tibia | D12 / D11 / D13 |
 
 The servo labels in the diagram correspond to the following pins: Servo 01–03 (D2–D4) 04–06 (D5–D7) 07–09 (D8–D10) 10–12 (D11–D13).
 
 ### Sensors & Peripherals
 
-| Module | Pin(s)
-
+| Module | Pin(s) |
 |---|---|
-
 | HC-SR04 Trigger | A5 (D19) |
-
 | HC-SR04 Echo | A4 (D18) |
-
 | Bluetooth TX/RX | D0 / D1 |
-
 | OLED SDA / SCL | A4 / A5 |
 
 Note: The OLED and Bluetooth module share the Arduino pins. They work with firmware sketches. Do not flash both at the time.
@@ -96,12 +77,9 @@ Note: The OLED and Bluetooth module share the Arduino pins. They work with firmw
 
 There are two sketches for the Spider Robot:
 
-| File Mode |
-
+| File | Mode |
 |---|---|
-
-Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
-
+| `Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
 | `Obstacle_Avoiding_Spider_Robot.ino` | Autonomous obstacle avoidance |
 
 ### Required Libraries
@@ -109,20 +87,13 @@ Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
 You can install these libraries using the Arduino Library Manager:
 
 | Library | Purpose |
-
 |---|---|
-
-Servo` | Controls the servos of the Spider Robot |
-
+| `Servo` | Controls the servos of the Spider Robot |
 | `FlexiTimer2` | Provides 50 Hz servo ISR timing for the Spider Robot |
-
 | `NewPing` | Drives the HC-SR04 ultrasonic sensor of the Spider Robot |
-
 | `Adafruit SSD1306` | Drives the OLED display of the Spider Robot |
-
 | `Adafruit GFX Library` | Provides graphics primitives for the OLED display of the Spider Robot |
-
-Wire` | Enables I²C communication for the Spider Robot |
+| `Wire` | Enables I²C communication for the Spider Robot |
 
 ---
 
@@ -149,22 +120,14 @@ When the Spider Robot boots up for the time it will stand up and perform a short
 You can connect to the Spider Robot using any Bluetooth terminal app at 9600 baud. Send characters to control the Spider Robot:
 
 | Command | Action | OLED Expression |
-
 |---|---|---|
-
 | `F` | The Spider Robot steps forward | Happy |
-
-| `B` The Spider Robot steps backward | Sad |
-
-L` | The Spider Robot turns left | Angry |
-
+| `B` | The Spider Robot steps backward | Sad |
+| `L` | The Spider Robot turns left | Angry |
 | `R` | The Spider Robot turns right | |
-
-| `W` | The Spider Robot waves its hand |  |
-
-| `U` | The Spider Robot shakes hands |  |
-
-| `V` | The Spider Robot dances  |
+| `W` | The Spider Robot waves its hand | |
+| `U` | The Spider Robot shakes hands | |
+| `V` | The Spider Robot dances | |
 
 ---
 
@@ -187,19 +150,12 @@ You can adjust the detection threshold by changing the value of `int thresh = 20
 The Spider Robot uses 3-DOF inverse kinematics per leg. Here are the key physical dimensions in millimeters:
 
 | Parameter | Value |
-
 |---|---|
-
 | Coxa length | 27.5 |
-
-Femur length | 50 (in Bluetooth mode) / 55 (in obstacle avoidance mode)
-
+| Femur length | 50 (in Bluetooth mode) / 55 (in obstacle avoidance mode) |
 | Tibia length | 77.1 (in Bluetooth mode) / 77.5 (, in obstacle avoidance mode) |
-
-Body side length | 71 |
-
-Default stance Z | -50 |
-
+| Body side length | 71 |
+| Default stance Z | -50 |
 | Step height Z | -30 |
 
 ---
@@ -207,13 +163,8 @@ Default stance Z | -50 |
 ## File Structure
 
 ```
-
 .
-
 ├── Bluetooth-controlling_spider_robot.ino
-
 ├── Obstacle_Avoiding_Spider_Robot.ino
-
 └── spider-3-in-1_bb.png
-
 ```
