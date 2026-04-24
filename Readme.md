@@ -1,157 +1,219 @@
-# 🕷️ Spider Robot
+# Spider Robot
 
-A 4-legged, 12-servo spider robot built on Arduino with two operating modes: **Bluetooth remote control** and **autonomous obstacle avoidance**. Features inverse kinematics for smooth, natural movement and an OLED display for expressive "face" animations (Bluetooth mode).
+The Spider Robot is a robot with 4 legs and 12 servos. It was built using Arduino. This Spider Robot has two operating modes. The first mode is Bluetooth control. The second mode is obstacle avoidance. The Spider Robot uses inverse kinematics for movement. It also has a display that shows face animations when it's in Bluetooth mode.
 
 ---
 
-## 📸 Circuit Diagram
+## Circuit Diagram
 
 ![Circuit Diagram](Schematics.png)
 
 ---
 
-## ✨ Features
+## Features
 
-- 4 legs × 3 DOF each = **12 servos** with full 3D inverse kinematics
-- **Bluetooth mode** — control via any serial Bluetooth app (HC-05 / HC-06)
-- **Obstacle avoidance mode** — autonomous navigation using an HC-SR04 ultrasonic sensor
-- **OLED face expressions** — happy, sad, angry, sleepy animations on a 128×32 SSD1306 display (Bluetooth mode)
-- Movement routines: walk forward/back, turn left/right, hand wave, hand shake, body dance
-- Powered by dual **18650 Li-ion cells** stepped down to 7 V for the servos
+- The Spider Robot has 4 legs with 3 degrees of freedom each. This means the Spider Robot has 12 servos with inverse kinematics.
+
+- In Bluetooth mode you can control the Spider Robot using any Bluetooth app. The Spider Robot uses HC-05 or HC-06 Bluetooth modules.
+
+- In obstacle avoidance mode the Spider Robot navigates on its own using an HC-SR04 sensor.
+
+- The Spider Robot has a display that shows face expressions like happy, sad, angry and sleepy. This only works in Bluetooth mode.
+
+- The Spider Robot can do movements like walking backward turning left and right waving its hand shaking hands and dancing.
+
+- The Spider Robot is powered by two 18650 Li-ion cells that are stepped down to 7 V for the servos.
 
 ---
 
-## 🛒 Hardware
+## Hardware
 
 | Component | Qty | Notes |
+
 |---|---|---|
-| Arduino Nano (or Uno) | 1 | Main microcontroller |
-| SG90 / MG90 Servo | 12 | 3 per leg |
-| HC-SR04 Ultrasonic Sensor | 1 | Obstacle avoidance |
-| HC-05 or HC-06 Bluetooth Module | 1 | Remote control |
-| SSD1306 OLED Display (128×32) | 1 | Face animations (BT mode) |
-| DC-DC Buck Converter | 1 | Steps 7.4–8.4 V → 7 V |
-| 18650 Li-ion Battery × 2 | 1 set | ~7.4 V supply |
-| Toggle Switch | 1 | Power on/off |
+
+| Arduino Nano | 1 | The main microcontroller of the Spider Robot |
+
+SG90 / MG90 Servo | 12 | 3 servos per leg of the Spider Robot |
+
+| HC-SR04 Ultrasonic Sensor | 1 | Used for obstacle avoidance in the Spider Robot |
+
+| HC-05 or HC-06 Bluetooth Module | 1 | Used for remote control of the Spider Robot |
+
+| SSD1306 OLED Display | 1 | Shows face animations in Bluetooth mode of the Spider Robot |
+
+DC-DC Buck Converter | 1 | Steps down the voltage to 7 V for the servos of the Spider Robot |
+
+18650 Li-ion Battery | 2 | Powers the Spider Robot at ~7.4 V |
+
+Toggle Switch | 1 | Turns the Spider Robot on and off |
 
 ---
 
-## 🔌 Wiring
+## Wiring
 
 ### Servo Pin Mapping
 
-| Leg | Servo | Arduino Pin |
-|---|---|---|
-| Leg 0 (front-right) | Coxa / Femur / Tibia | D3 / D4 / D2 |
-| Leg 1 (front-left) | Coxa / Femur / Tibia | D6 / D7 / D5 |
-| Leg 2 (rear-right) | Coxa / Femur / Tibia | D9 / D8 / D10 |
-| Leg 3 (rear-left) | Coxa / Femur / Tibia | D12 / D11 / D13 |
+| Leg | Servo Arduino Pin |
 
-Servo labels in the diagram correspond to: **Servo 01–03** (D2–D4), **04–06** (D5–D7), **07–09** (D8–D10), **10–12** (D11–D13).
+|---|---|---|
+
+| Leg 0 | Coxa / Femur / Tibia D3 / D4 / D2 |
+
+| Leg 1 | Coxa / Femur / Tibia | D6 / D7 / D5 |
+
+Leg 2 | Coxa / Femur / Tibia | D9 / D8 / D10 |
+
+| Leg 3 | Coxa / Femur / Tibia | D12 / D11 / D13 |
+
+The servo labels in the diagram correspond to the following pins: Servo 01–03 (D2–D4) 04–06 (D5–D7) 07–09 (D8–D10) 10–12 (D11–D13).
 
 ### Sensors & Peripherals
 
-| Module | Pin(s) |
-|---|---|
-| HC-SR04 — Trigger | A5 (D19) |
-| HC-SR04 — Echo | A4 (D18) |
-| Bluetooth TX/RX | D0 / D1 (hardware serial) |
-| OLED SDA / SCL | A4 / A5 (I²C) |
+| Module | Pin(s)
 
-> **Note:** The OLED and Bluetooth module share the same Arduino and are used in separate firmware sketches — do not flash both simultaneously.
+|---|---|
+
+| HC-SR04 Trigger | A5 (D19) |
+
+| HC-SR04 Echo | A4 (D18) |
+
+| Bluetooth TX/RX | D0 / D1 |
+
+| OLED SDA / SCL | A4 / A5 |
+
+Note: The OLED and Bluetooth module share the Arduino pins. They work with firmware sketches. Do not flash both at the time.
 
 ### Power
 
-- Two 18650 cells in series (~7.4 V) → DC-DC buck converter → **7 V rail** for all servos
-- Arduino powered from the same rail via VIN or USB during programming
+- Two 18650 cells are connected in series to get ~7.4 V. This voltage is then stepped down to 7 V using a DC-DC buck converter. The 7 V rail powers all the servos of the Spider Robot.
+
+- The Arduino is powered from the 7 V rail via VIN or USB during programming.
 
 ---
 
-## 💾 Firmware
+## Firmware
 
-Two independent sketches are provided:
+There are two sketches for the Spider Robot:
 
-| File | Mode |
+| File Mode |
+
 |---|---|
-| `Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
+
+Bluetooth-controlling_spider_robot.ino` | Bluetooth remote control + OLED face |
+
 | `Obstacle_Avoiding_Spider_Robot.ino` | Autonomous obstacle avoidance |
 
 ### Required Libraries
 
-Install via **Arduino Library Manager** (`Sketch → Include Library → Manage Libraries`):
+You can install these libraries using the Arduino Library Manager:
 
 | Library | Purpose |
+
 |---|---|
-| `Servo` (built-in) | Servo control |
-| `FlexiTimer2` | 50 Hz servo ISR timing |
-| `NewPing` | HC-SR04 ultrasonic driver |
-| `Adafruit SSD1306` | OLED display driver |
-| `Adafruit GFX Library` | OLED graphics primitives |
-| `Wire` (built-in) | I²C communication |
+
+Servo` | Controls the servos of the Spider Robot |
+
+| `FlexiTimer2` | Provides 50 Hz servo ISR timing for the Spider Robot |
+
+| `NewPing` | Drives the HC-SR04 ultrasonic sensor of the Spider Robot |
+
+| `Adafruit SSD1306` | Drives the OLED display of the Spider Robot |
+
+| `Adafruit GFX Library` | Provides graphics primitives for the OLED display of the Spider Robot |
+
+Wire` | Enables I²C communication for the Spider Robot |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-1. **Assemble** the robot frame and mount all 12 servos.
-2. **Wire** components as per the circuit diagram above.
-3. **Install** all required libraries in the Arduino IDE.
-4. **Choose a sketch** depending on the desired mode.
-5. **Upload** to your Arduino Nano via USB.
-6. **Power on** via the toggle switch.
+1. Assemble the frame of the Spider Robot and mount all 12 servos.
 
-On first boot the robot will stand up and perform a short greeting animation before awaiting commands.
+2. Wire the components according to the circuit diagram.
+
+3. Install all the required libraries in the Arduino IDE.
+
+4. Choose a sketch based on the desired mode of the Spider Robot.
+
+5. Upload the sketch to your Arduino Nano via USB.
+
+6. Power on the Spider Robot using the toggle switch.
+
+When the Spider Robot boots up for the time it will stand up and perform a short greeting animation before waiting for commands.
 
 ---
 
-## 🎮 Bluetooth Commands
+## Bluetooth Commands
 
-Connect with any Bluetooth serial terminal app (e.g. **Serial Bluetooth Terminal** on Android) at **9600 baud**. Send single characters:
+You can connect to the Spider Robot using any Bluetooth terminal app at 9600 baud. Send characters to control the Spider Robot:
 
 | Command | Action | OLED Expression |
+
 |---|---|---|
-| `F` | Step forward | 😊 Happy |
-| `B` | Step backward | 😢 Sad |
-| `L` | Turn left | 😠 Angry (variant 2) |
-| `R` | Turn right | 😠 Angry (variant 1) |
-| `W` | Hand wave | — |
-| `U` | Hand shake | — |
-| `V` | Body dance | — |
+
+| `F` | The Spider Robot steps forward | Happy |
+
+| `B` The Spider Robot steps backward | Sad |
+
+L` | The Spider Robot turns left | Angry |
+
+| `R` | The Spider Robot turns right | |
+
+| `W` | The Spider Robot waves its hand |  |
+
+| `U` | The Spider Robot shakes hands |  |
+
+| `V` | The Spider Robot dances  |
 
 ---
 
-## 🤖 Obstacle Avoidance
+## Obstacle Avoidance
 
-When flashed with the obstacle avoidance sketch, the robot:
+When the Spider Robot is in obstacle avoidance mode:
 
-1. Walks forward continuously.
-2. Continuously polls the HC-SR04 sensor.
-3. When an obstacle is detected within **20 cm**, it stops, turns in a random direction, and resumes walking.
+1. The Spider Robot walks forward continuously.
 
-The detection threshold can be adjusted by changing `int thresh = 20;` (value in cm) at the top of the sketch.
+2. The Spider Robot continuously checks for obstacles using the HC-SR04 sensor.
+
+3. If the Spider Robot detects an obstacle within 20 cm it stops turns in a direction. Resumes walking.
+
+You can adjust the detection threshold by changing the value of `int thresh = 20;` in the sketch. This value is in centimeters.
 
 ---
 
-## ⚙️ Kinematics Parameters
+## Kinematics Parameters
 
-The robot uses 3-DOF inverse kinematics per leg. Key physical dimensions (in mm):
+The Spider Robot uses 3-DOF inverse kinematics per leg. Here are the key physical dimensions in millimeters:
 
 | Parameter | Value |
+
 |---|---|
-| Coxa length (`length_c`) | 27.5 |
-| Femur length (`length_a`) | 50 (BT) / 55 (obstacle) |
-| Tibia length (`length_b`) | 77.1 (BT) / 77.5 (obstacle) |
-| Body side length | 71 |
-| Default stance Z | −50 |
-| Step height Z | −30 |
+
+| Coxa length | 27.5 |
+
+Femur length | 50 (in Bluetooth mode) / 55 (in obstacle avoidance mode)
+
+| Tibia length | 77.1 (in Bluetooth mode) / 77.5 (, in obstacle avoidance mode) |
+
+Body side length | 71 |
+
+Default stance Z | -50 |
+
+| Step height Z | -30 |
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
+
 .
-├── Bluetooth-controlling_spider_robot.ino   # Bluetooth + OLED sketch
-├── Obstacle_Avoiding_Spider_Robot.ino        # Autonomous mode sketch
-└── spider-3-in-1_bb.png                      # Fritzing circuit diagram
+
+├── Bluetooth-controlling_spider_robot.ino
+
+├── Obstacle_Avoiding_Spider_Robot.ino
+
+└── spider-3-in-1_bb.png
+
 ```
