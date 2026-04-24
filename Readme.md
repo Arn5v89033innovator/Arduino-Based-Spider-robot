@@ -1,5 +1,5 @@
 # Spider Robot
-
+[NO AI USED IN THIS PROJECT]
 The Spider Robot is a robot with 4 legs and 12 servos. It was built using Arduino. This Spider Robot has two operating modes. The first mode is Bluetooth control. The second mode is obstacle avoidance. The Spider Robot uses inverse kinematics for movement. It also has a display that shows face animations when it's in Bluetooth mode.
 
 ---
